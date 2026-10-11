@@ -1,0 +1,10 @@
+sql_queries:
+  outputs:
+    prod:
+      method: oauth
+      dataset: "{{ env_var('DATASET_NAME') }}"
+      project: "{{ env_var('GOOGLE_CLOUD_PROJECT_ID') }}"
+      location: EU
+      type: bigquery
+
+  target: prod

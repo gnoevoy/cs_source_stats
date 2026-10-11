@@ -1,0 +1,8 @@
+version: 2
+
+sources:
+  - name: "{{ env_var('DATASET_NAME') }}"
+    database: "{{ env_var('GOOGLE_CLOUD_PROJECT_ID') }}"
+    schema: "{{ env_var('DATASET_NAME') }}"
+    tables:
+      - name: my_sessions

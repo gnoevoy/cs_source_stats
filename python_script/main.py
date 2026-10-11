@@ -22,7 +22,7 @@ bg_client = bigquery.Client(project=BIGQUERY_PROJECT_ID_)
 job_config = bigquery.LoadJobConfig(write_disposition=bigquery.WriteDisposition.WRITE_TRUNCATE)
 
 
-def get_sessions_from_webpage(sessions_cards, session_id, page_num):
+def get_sessions_from_webpage(sessions_cards, page_num):
     result = []
 
     for session in sessions_cards:
@@ -31,15 +31,14 @@ def get_sessions_from_webpage(sessions_cards, session_id, page_num):
         session_start, session_end = [time_value.get("data-tooltip") for time_value in session_time.find_all("span", {"data-tooltip": True})]
         # Extract the main content of the session card
         content = session.get_text(strip=True, separator="||").split("||")
-        session_info = [session_id, session_start, session_end, content[-3], content[-2]]
+        session_info = [session_start, session_end, content[-3], content[-2]]
         result.append(session_info)
-        session_id += 1
 
     print(f"Page {page_num}: extracted {len(result)} / {len(sessions_cards)}")
-    return result, session_id
+    return result
 
 
-def get_all_sessions(session_id, page_num):
+def get_all_sessions(page_num):
     print("01. DATA EXTRACTION")
     sessions_data = []
 
@@ -54,7 +53,7 @@ def get_all_sessions(session_id, page_num):
         if not sessions_cards:
             break
 
-        sessions_on_page, session_id = get_sessions_from_webpage(sessions_cards, session_id, page_num)
+        sessions_on_page = get_sessions_from_webpage(sessions_cards, page_num)
         sessions_data.extend(sessions_on_page)
         page_num += 1
 
@@ -64,16 +63,21 @@ def get_all_sessions(session_id, page_num):
 
 def transform_data(sessions_data):
     # Create pandas DataFrame
-    col_names = ["session_id", "session_start", "session_end", "values", "headshots"]
+    col_names = ["session_start", "session_end", "values", "headshots"]
     df = pd.DataFrame(sessions_data, columns=col_names)
 
     # Extract kills, deaths and headshots values
     df["kills"] = df["values"].str.split("/").str[0].str.strip().astype(int)
     df["deaths"] = df["values"].str.split("/").str[1].str.strip().astype(int)
     df["headshots"] = df["headshots"].str[1:-4].astype(int)
+
     # Format timestamps appropriately
     df["session_start"] = pd.to_datetime(df["session_start"], format="%d.%m.%Y %H:%M:%S")
     df["session_end"] = pd.to_datetime(df["session_end"], format="%d.%m.%Y %H:%M:%S")
+
+    # Assign ID's for each session
+    df = df.sort_values("session_start", ascending=True).reset_index(drop=True)
+    df["session_id"] = range(1, len(df) + 1)
 
     df.drop(columns=["values"], inplace=True)
     print("02. DATA TRANSFORMATION")
@@ -91,8 +95,7 @@ def write_df_to_bigquery(df, table_name):
 
 def main():
     page_num = 1
-    session_id = 1
-    sessions_data = get_all_sessions(session_id, page_num)
+    sessions_data = get_all_sessions(page_num)
     df = transform_data(sessions_data)
     write_df_to_bigquery(df, "my_sessions")
 

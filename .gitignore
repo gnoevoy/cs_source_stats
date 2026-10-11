@@ -1,4 +1,8 @@
 .venv/
 .env
-
 *.txt
+
+sql_queries/target/
+sql_queries/dbt_packages/
+sql_queries/.user.yml
+logs/
