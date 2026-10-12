@@ -1,3 +1,5 @@
+-- Source table with extra calculated features and removed outliers
+
 select 
     session_id,
 
@@ -16,7 +18,7 @@ select
         when extract(hour from session_start) between 6 and 11 then 'Morning'
         when extract(hour from session_start) between 12 and 17 then 'Afternoon'
         when extract(hour from session_start) between 18 and 23 then 'Evening'
-        else 'night'
+        else 'Night'
     end as day_part,    
 
     case
@@ -29,19 +31,17 @@ select
     kills,
     deaths,
     headshots,
-    coalesce(round(safe_divide(kills, deaths), 2), 0) as session_kdr,
+    round(safe_divide(kills, deaths), 2) as session_kdr,
     coalesce(round(safe_divide(headshots, kills) * 100,2), 0) as session_hs_pct, 
-    round(safe_divide(kills, timestamp_diff(session_end, session_start, minute)),2) as session_kills_per_minute
+    round(safe_divide(kills, timestamp_diff(session_end, session_start, minute)),2) as session_kills_per_minute,
 
-    -- add quality bin for each session
-
+    case 
+        when safe_divide(kills, deaths) >= 1.5 and safe_divide(headshots, kills) >= 0.7 then "Good"
+        when safe_divide(kills, deaths) >= 1.0 and safe_divide(headshots, kills) >= 0.5 then "Average"
+        else "Poor"
+    end as session_quality
 
 from {{ source(env_var('DATASET_NAME'), 'my_sessions') }}
 -- Remove sessions without any activity 
 where (kills > 0 or deaths > 0)
 order by session_id asc
-
-
-
-
-
