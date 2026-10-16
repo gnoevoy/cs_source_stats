@@ -1,4 +1,4 @@
--- Task 1: Understand overall performance based on key metrics such as KDR, HS%, playtime and kills per minute
+-- Task 1: Evaluate overall gaming performance using key metrics such as KDR, HS%, kills per minute
 
 with source_df as (
     select

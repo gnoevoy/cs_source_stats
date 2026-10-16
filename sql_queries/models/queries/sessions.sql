@@ -1,4 +1,4 @@
--- Source table with extra calculated features and removed outliers
+-- Reusable source table with calculated columns for sessions analysis
 
 select 
     session_id,
@@ -14,6 +14,7 @@ select
     extract(hour from session_start) as hour,
     timestamp_diff(session_end, session_start, minute) as session_duration_min,
 
+    -- Using conditional logic to creating categorical values
     case
         when extract(hour from session_start) between 6 and 11 then 'Morning'
         when extract(hour from session_start) between 12 and 17 then 'Afternoon'
@@ -42,6 +43,6 @@ select
     end as session_quality
 
 from {{ source(env_var('DATASET_NAME'), 'my_sessions') }}
--- Remove sessions without any activity 
+-- Remove sessions without any activity (no kills or deaths)
 where (kills > 0 or deaths > 0)
 order by session_id asc
