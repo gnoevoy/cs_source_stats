@@ -65,23 +65,21 @@ from playing_performance
 order by 1 asc
 
 
--- Results:
+-- RESULTS:
 
 -- PLAYING HABITS & PERFORMANCE
--- Evening dominates activity: 125 sessions (~73%).
--- Saturday leads with 51 sessions, followed by Friday (32).
--- Weekend sessions account for ~46% of total activity.
--- Friday and Saturday are the most active days.
+-- Evening dominates activity: 81 sessions (73.6%).
+-- Saturday leads with 30 sessions, followed by Friday (24).
+-- Weekend sessions account for 46.4% of total activity.
 
 -- PERFORMANCE INSIGHTS
--- Saturday afternoon: strong KDR (2.49) and KPM (1.47).
--- Friday afternoon: KDR 1.64 | KPM 1.44.
--- Saturday evening: 35 sessions, but lower KDR (1.38).
--- Thursday evening: weaker KDR (1.24) and KPM (1.04).
--- Night KDR peaks on Tuesday (4.0) and Monday (3.27).
--- Both night peaks are based on only 1 session.
+-- Saturday afternoon: KDR 2.49 and KPM 1.46 across 3 sessions.
+-- Saturday evening: 21 sessions, but lower KDR (1.37) and KPM (1.08).
+-- Friday evening: 20 sessions with KDR 1.61 and KPM 1.19.
+-- Thursday evening: lowest evening KDR (1.24) and KPM (1.04).
+-- Tuesday night: highest KDR (4.00), based on only 1 session.
 
 -- KEY TAKEAWAY
--- Activity is concentrated on weekend evenings.
--- Higher activity does not guarantee better performance.
--- Afternoons generally show stronger combat efficiency.
+-- Evening play is most common, especially on Friday and Saturday.
+-- Afternoon KDR exceeds evening KDR on every day with both.
+-- Small afternoon and night samples limit firm conclusions.

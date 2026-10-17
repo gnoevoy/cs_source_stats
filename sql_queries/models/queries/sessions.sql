@@ -12,7 +12,8 @@ select
     format_date("%A", session_start) as day_of_week,
     case when extract(dayofweek from session_start) in (1, 7) then 1 else 0 end as is_weekend,
     extract(hour from session_start) as hour,
-    timestamp_diff(session_end, session_start, minute) as session_duration_min,
+    session_duration_min,
+    downtime_min,
 
     -- Using conditional logic to creating categorical values
     case
@@ -23,8 +24,8 @@ select
     end as day_part,    
 
     case
-        when timestamp_diff(session_end, session_start, minute) <= 10 then "Short"
-        when timestamp_diff(session_end, session_start, minute) <= 45 then "Medium"
+        when session_duration_min <= 15 then "Short"
+        when session_duration_min <= 45 then "Medium"
         else "Long"
     end as duration_category,
 
@@ -34,11 +35,11 @@ select
     headshots,
     round(safe_divide(kills, deaths), 2) as session_kdr,
     coalesce(round(safe_divide(headshots, kills) * 100,2), 0) as session_hs_pct, 
-    round(safe_divide(kills, timestamp_diff(session_end, session_start, minute)),2) as session_kills_per_minute,
+    round(safe_divide(kills, session_duration_min),2) as session_kills_per_minute,
 
     case 
-        when safe_divide(kills, deaths) >= 1.5 and safe_divide(headshots, kills) >= 0.7 then "Good"
-        when safe_divide(kills, deaths) >= 1.0 and safe_divide(headshots, kills) >= 0.5 then "Average"
+        when safe_divide(kills, deaths) >= 1.8 and safe_divide(headshots, kills) >= 0.7 then "Good"
+        when safe_divide(kills, deaths) >= 1.2 and safe_divide(headshots, kills) >= 0.5 then "Average"
         else "Poor"
     end as session_quality
 

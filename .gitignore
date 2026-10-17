@@ -1,6 +1,8 @@
 .venv/
 .env
 *.txt
+*.csv
+*.ipynb
 
 sql_queries/target/
 sql_queries/dbt_packages/

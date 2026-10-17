@@ -58,34 +58,33 @@ _2026_vs_2025 as (
 )
 
 select *
-from trends_2026
-order by 1,2,3
+from _2026_vs_2025
+order by 1
 
 
--- Results:
+-- RESULTS:
 
 -- PERFORMANCE TRENDS
--- 99 sessions in 2026, with peak activity in March and September.
--- KDR generally declined from 2.43 to 1.57, with noticeable fluctuations.
--- Rolling KDR dropped to 1.27, indicating weaker recent performance.
--- HS% remained relatively strong, mostly between 75–90%.
--- KPM declined from 1.51 to 1.24, suggesting lower combat efficiency.
+-- 66 sessions in 2026, with peak activity in March (11) and September (9).
+-- KDR fluctuated from 0.50 to 2.43, ending at 1.56.
+-- Rolling KDR recovered from 1.25 to 1.36 in the latest periods.
+-- KPM ended at 1.39, while HS% fell to 57.14%, its lowest recorded level.
 
 -- KEY TAKEAWAY
--- Performance weakened overall despite consistently strong headshot accuracy.
--- Higher playing activity did not consistently lead to better results.
+-- Recent KDR and KPM improved, but remained below the opening period.
+-- Performance varied considerably, with many periods containing few sessions.
 
 --
 
 -- YEAR-OVER-YEAR COMPARISON
--- Sessions increased by 37.5%, while playtime grew by 23.8%.
--- KDR declined by 6.4% and KPM by 5%, while HS% improved by 1.82 pp.
--- Poor sessions increased from 19 to 37 (26.4% to 37.4%).
+-- Sessions increased by 50%, while playtime grew by 24.6%.
+-- KDR declined by 6.4% and KPM by 5%, while HS% rose by 1.64 pp.
+-- Poor sessions increased from 12 to 30 (27.3% to 45.5%).
 
 -- YEARLY PERFORMANCE
--- 2025: 72 sessions | KDR 1.56 | HS 76.17% | KPM 1.20 | 19.23 hours.
--- 2026: 99 sessions | KDR 1.46 | HS 77.99% | KPM 1.14 | 23.80 hours.
+-- 2025: 44 sessions | KDR 1.56 | HS 76.17% | KPM 1.20 | 19.30 hours.
+-- 2026: 66 sessions | KDR 1.46 | HS 77.81% | KPM 1.14 | 24.04 hours.
 
 -- KEY TAKEAWAY
--- Higher activity in 2026, but slightly weaker overall performance.
--- More frequent Poor sessions despite improved headshot accuracy.
+-- Higher activity in 2026 accompanied weaker KDR and KPM.
+-- Poor sessions became more common despite higher overall HS%.
