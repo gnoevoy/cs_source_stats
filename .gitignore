@@ -1,10 +1,17 @@
+# Python
 .venv/
 .env
-*.txt
-*.csv
 *.ipynb
 
+# Excel
+*.csv
+!excel_workbook/*.csv
+
+# SQL
 sql_queries/target/
 sql_queries/dbt_packages/
 sql_queries/.user.yml
 logs/
+
+# Other
+*.txt
