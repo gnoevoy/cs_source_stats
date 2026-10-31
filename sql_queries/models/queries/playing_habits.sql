@@ -63,23 +63,3 @@ playing_performance as (
 select *
 from playing_performance
 order by 1 asc
-
-
--- RESULTS:
-
--- PLAYING HABITS & PERFORMANCE
--- Evening dominates activity: 81 sessions (73.6%).
--- Saturday leads with 30 sessions, followed by Friday (24).
--- Weekend sessions account for 46.4% of total activity.
-
--- PERFORMANCE INSIGHTS
--- Saturday afternoon: KDR 2.49 and KPM 1.46 across 3 sessions.
--- Saturday evening: 21 sessions, but lower KDR (1.37) and KPM (1.08).
--- Friday evening: 20 sessions with KDR 1.61 and KPM 1.19.
--- Thursday evening: lowest evening KDR (1.24) and KPM (1.04).
--- Tuesday night: highest KDR (4.00), based on only 1 session.
-
--- KEY TAKEAWAY
--- Evening play is most common, especially on Friday and Saturday.
--- Afternoon KDR exceeds evening KDR on every day with both.
--- Small afternoon and night samples limit firm conclusions.

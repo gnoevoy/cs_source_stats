@@ -58,18 +58,3 @@ select
 from streaks_level_cte
 group by 1
 order by streaks_count desc
-
-
--- RESULTS:
-
--- STREAK ANALYSIS
--- Average streaks are most common: 31, followed by Poor (25) and Good (20).
--- Poor streaks have the most multi-session runs (4) and longest run (5 sessions).
--- Good streaks are shortest on average (1.20 sessions), with a maximum of 3.
--- Average streaks have the most playtime per streak (46.65 min), compared with Good (30.50 min) and Poor (21.78 min).
--- Good streaks: KDR 2.22 | HS 79.50% | KPM 1.43.
--- Poor streaks: KDR 0.94 | HS 78.25% | KPM 0.82.
-
--- KEY TAKEAWAY
--- Poor performance persists across more consecutive sessions, while Good streaks are less frequent and shorter.
--- Similar HS% in Good and Poor groups contrasts with large KDR and KPM differences.

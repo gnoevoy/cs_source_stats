@@ -7,10 +7,10 @@ import numpy as np
 import requests
 import os
 
-# Script to retrieve my sessions data from a website, logic includes:
-# 1. Extract sessions data from the website
-# 2. Transform data and merge interrupted sessions (due to crashouts)
-# 3. Load data to BigQuery
+# Script to retrieve sessions data from a website, logic includes:
+# 1.Extract sessions data from the website
+# 2.Transform data and merge interrupted sessions (handle crashouts and lags)
+# 3.Load data to BigQuery
 
 # Load env variables
 load_dotenv()
