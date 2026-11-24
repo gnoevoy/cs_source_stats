@@ -3,10 +3,6 @@
 .env
 *.ipynb
 
-# Excel
-*.csv
-!excel_workbook/*.csv
-
 # SQL
 sql_queries/target/
 sql_queries/dbt_packages/
@@ -15,3 +11,4 @@ logs/
 
 # Other
 *.txt
+*.csv
